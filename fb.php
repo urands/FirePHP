@@ -31,9 +31,11 @@
  * @license     [MIT License](http://www.opensource.org/licenses/mit-license.php)
  * @package     FirePHPCore
  */
-if (!class_exists('ChromePhp', false)) {
-    require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php';
+if (!class_exists('ChromePHP', false)) {
+    require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePHP.php';
 }
+
+ChromePHP::getInstance()->addSetting(ChromePHP::BACKTRACE_LEVEL, 3);
 /**
  * Sends the given data to the FirePHP Firefox Extension.
  * The data can be displayed in the Firebug Console or in the
@@ -46,13 +48,15 @@ if (!class_exists('ChromePhp', false)) {
  */
 function fb()
 {
-    $instance = FirePHP::getInstance(true);
-
+    $instance = ChromePHP::getInstance(true);
     $args = func_get_args();
-    return call_user_func_array(array($instance, 'fb'), $args);
+    if ( count($args) == 1) $args = reset($args);
+    return FB::send(ChromePhp::LOG, $args);
+    //return call_user_func_array(array($instance, 'log'), $args);
 }
 class FB
 {
+
     /**
      * Set an Insight console to direct all logging calls to
      *
@@ -61,7 +65,7 @@ class FB
      */
     public static function setLogToInsightConsole($console)
     {
-        FirePHP::getInstance(true)->setLogToInsightConsole($console);
+        //FirePHP::getInstance(true)->setLogToInsightConsole($console);
     }
     /**
      * Enable and disable logging to Firebug
@@ -72,7 +76,7 @@ class FB
      */
     public static function setEnabled($enabled)
     {
-        FirePHP::getInstance(true)->setEnabled($enabled);
+        //FirePHP::getInstance(true)->setEnabled($enabled);
     }
 
     /**
@@ -110,7 +114,7 @@ class FB
      */
     public static function setOptions($options)
     {
-        FirePHP::getInstance(true)->setOptions($options);
+        ChromePhp::getInstance()->setSettings($options);
     }
     /**
      * Get options for the library
@@ -120,7 +124,7 @@ class FB
      */
     public static function getOptions()
     {
-        return FirePHP::getInstance(true)->getOptions();
+        return ChromePhp::getInstance()->getSettings();
     }
     /**
      * Log object to firebug
@@ -133,7 +137,7 @@ class FB
     public static function send()
     {
         $args = func_get_args();
-        return call_user_func_array(array(FirePHP::getInstance(true), 'fb'), $args);
+        return call_user_func_array(array(ChromePhp::getInstance(), $args[0] ), $args);
     }
     /**
      * Start a group for following messages
@@ -148,7 +152,9 @@ class FB
      */
     public static function group($name, $options=null)
     {
-        return FirePHP::getInstance(true)->group($name, $options);
+        return self::send(ChromePhp::GROUP, $name, $options );
+
+        //return ChromePhp::getInstance()->group(ChromePhp::GROUP_END,$name, $options);
     }
     /**
      * Ends a group you have started before
@@ -158,7 +164,7 @@ class FB
      */
     public static function groupEnd()
     {
-        return self::send(null, null, FirePHP::GROUP_END);
+        return self::send(ChromePhp::GROUP_END, null, null );
     }
     /**
      * Log object with label to firebug console
@@ -171,7 +177,7 @@ class FB
      */
     public static function log($object, $label=null)
     {
-        return self::send($object, $label, FirePHP::LOG);
+        return self::send( ChromePhp::LOG, $object);
     }
     /**
      * Log object with label to firebug console
@@ -184,7 +190,7 @@ class FB
      */
     public static function info($object, $label=null)
     {
-        return self::send($object, $label, FirePHP::INFO);
+        return self::send(ChromePhp::INFO, $object);
     }
     /**
      * Log object with label to firebug console
@@ -197,7 +203,7 @@ class FB
      */
     public static function warn($object, $label=null)
     {
-        return self::send($object, $label, FirePHP::WARN);
+        return self::send(ChromePhp::WARN, $object);
     }
     /**
      * Log object with label to firebug console
@@ -210,7 +216,7 @@ class FB
      */
     public static function error($object, $label=null)
     {
-        return self::send($object, $label, FirePHP::ERROR);
+        return self::send(ChromePhp::ERROR, $object);
     }
     /**
      * Dumps key and variable to firebug server panel
@@ -223,8 +229,33 @@ class FB
      */
     public static function dump($key, $variable)
     {
-        return self::send($variable, $key, FirePHP::DUMP);
+        return self::send(ChromePhp::LOG, $variable, $key );
     }
+
+    /**
+     * Set settings a trace in the firebug console
+     *
+     * @see FirePHP::TRACE
+     * @param string $label
+     * @return true
+     * @throws Exception
+     */
+    public static function settings()
+    {
+        $args = func_get_args();
+        if ( count($args) == 1  && ( gettype($args[0]) == 'string' ) ){
+            return ChromePhp::getInstance()->getSetting($args[0]);    
+        }elseif(  gettype($args[0]) == 'array' ){
+            return ChromePhp::getInstance()->setSetting($args[0]);    
+        }elseif(  count($args) == 2  ){
+            return ChromePhp::getInstance()->setSetting($args[0],$args[1]); 
+        }
+        return false;
+    }
+
+
+
+
     /**
      * Log a trace in the firebug console
      *
@@ -233,9 +264,9 @@ class FB
      * @return true
      * @throws Exception
      */
-    public static function trace($label)
+    public static function trace($type = ChromePhp::TABLE)
     {
-        return self::send($label, FirePHP::TRACE);
+        return self::send( $type, debug_backtrace() );
     }
     /**
      * Log a table in the firebug console
@@ -246,8 +277,9 @@ class FB
      * @return true
      * @throws Exception
      */
-    public static function table($label, $table)
+    public static function table($label, $table = null)
     {
-        return self::send($table, $label, FirePHP::TABLE);
+        if ( $table === null ) $table = $label;
+        return self::send(ChromePhp::TABLE, $table );
     }
 }
