@@ -31,11 +31,14 @@
  * @license     [MIT License](http://www.opensource.org/licenses/mit-license.php)
  * @package     FirePHPCore
  */
-if (!class_exists('ChromePHP', false)) {
-    require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePHP.php';
+
+use ChromePhp as CP;
+
+if (!class_exists('ChromePhp', false)) {
+    //require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php';
 }
 
-ChromePHP::getInstance()->addSetting(ChromePHP::BACKTRACE_LEVEL, 3);
+ChromePhp::getInstance()->addSetting(ChromePhp::BACKTRACE_LEVEL, 3);
 /**
  * Sends the given data to the FirePHP Firefox Extension.
  * The data can be displayed in the Firebug Console or in the
@@ -48,7 +51,7 @@ ChromePHP::getInstance()->addSetting(ChromePHP::BACKTRACE_LEVEL, 3);
  */
 function fb()
 {
-    $instance = ChromePHP::getInstance(true);
+    $instance = ChromePhp::getInstance(true);
     $args = func_get_args();
     if ( count($args) == 1) $args = reset($args);
     return FB::send(ChromePhp::LOG, $args);
