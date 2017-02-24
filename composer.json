@@ -1,0 +1,26 @@
+{
+    "name": "urands/firephp",
+    "type": "library",
+    "description": "Log variables to the Firefox 51+ console (alternate solution for FirePHP via Chrome Logger protocol).",
+    "keywords": ["log","logging","firephp","firefox"],
+    "homepage": "http://github.com/urands/firephp",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Iurii Bell",
+            "email": "ds@inbox.ru",
+            "homepage": "http://firephp.bel-tech.ru",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.0.0",
+        "ccampbell/chromephp": ">=4.0"
+    },
+    "autoload": {
+        "psr-0": {
+            "FB": ""
+        }
+    }
+}
