@@ -1,7 +1,5 @@
-# FirePHP 1.1 
+# FirePHP 1.0.4 
 Replacing the original FirePHP to the new based on ChromePhp
-
-===========
 
 ## Overview
 FirePHP is a PHP library for the Chrome Logger Google Chrome extension and Firebug console logger Firefox 51+.
@@ -50,16 +48,10 @@ This library allows you to log variables to console.
 
 	```
 
-2. Open console in your browser
-
-
+2. Open developer console (F12) in your browser
 
 ## Support & Feedback
-==================
-
 See [Support](http://firephp.bel-tech.ru)
-
-
 
 ## Author
 This project is authored and maintained by [Iurii Bell](http://firephp.bel-tech.ru/).

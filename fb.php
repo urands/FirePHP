@@ -53,8 +53,8 @@ function fb()
     $args = func_get_args();
     if ( count($args) == 1) $args = reset($args);
     return FB::send(ChromePhp::LOG, $args);
-    //return call_user_func_array(array($instance, 'log'), $args);
 }
+
 class FB
 {
 
@@ -111,7 +111,7 @@ class FB
      */
     public static function setObjectFilter($class, $filter)
     {
-       //FirePHP::getInstance(true)->setObjectFilter($class, $filter);
+       return false;//FirePHP::getInstance(true)->setObjectFilter($class, $filter);
     }
 
     /**
@@ -123,7 +123,7 @@ class FB
      */
     public static function setOptions($options)
     {
-        ChromePhp::getInstance()->setSettings($options);
+        return ChromePhp::getInstance()->setSettings($options);
     }
     /**
      * Get options for the library
