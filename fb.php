@@ -64,7 +64,7 @@ class FB
      *
      * @var boolean
      */
-    protected static bool $enabled = true;
+    protected static $enabled = true;
 
     /**
      * Set an Insight console to direct all logging calls to
