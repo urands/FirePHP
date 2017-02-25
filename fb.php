@@ -26,16 +26,14 @@
  *
  * ***** END LICENSE BLOCK *****
  *
- * @copyright   Copyright (C) 2007+ Christoph Dorn
- * @author      Christoph Dorn <christoph@christophdorn.com>
- * @license     [MIT License](http://www.opensource.org/licenses/mit-license.php)
- * @package     FirePHPCore
+ * @copyright   Copyright (C) 2017+ 
+ * @author      Bell
+ * @license     MIT
+ * @package     FirePHP
  */
 
-use ChromePhp as CP;
-
 if (!class_exists('ChromePhp', false)) {
-    //require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php';
+    require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php';
 }
 
 ChromePhp::getInstance()->addSetting(ChromePhp::BACKTRACE_LEVEL, 3);
@@ -44,7 +42,7 @@ ChromePhp::getInstance()->addSetting(ChromePhp::BACKTRACE_LEVEL, 3);
  * The data can be displayed in the Firebug Console or in the
  * "Server" request tab.
  *
- * @see http://www.firephp.org/Wiki/Reference/Fb
+ * @see  http://firephp.bel-tech.ru
  * @param mixed $Object
  * @return true
  * @throws Exception
@@ -59,6 +57,14 @@ function fb()
 }
 class FB
 {
+
+
+    /**
+     * Flag to enable/disable logging
+     *
+     * @var boolean
+     */
+    protected static bool $enabled = true;
 
     /**
      * Set an Insight console to direct all logging calls to
@@ -77,9 +83,9 @@ class FB
      * @param boolean $enabled TRUE to enable, FALSE to disable
      * @return void
      */
-    public static function setEnabled($enabled)
+    public static function setEnabled($enable)
     {
-        //FirePHP::getInstance(true)->setEnabled($enabled);
+        self::$enabled = $enable;
     }
 
     /**
@@ -90,7 +96,7 @@ class FB
      */
     public static function getEnabled()
     {
-        return FirePHP::getInstance(true)->getEnabled();
+        return self::$enabled;
     }
 
     /**
@@ -105,7 +111,7 @@ class FB
      */
     public static function setObjectFilter($class, $filter)
     {
-      FirePHP::getInstance(true)->setObjectFilter($class, $filter);
+       //FirePHP::getInstance(true)->setObjectFilter($class, $filter);
     }
 
     /**
@@ -132,13 +138,14 @@ class FB
     /**
      * Log object to firebug
      *
-     * @see http://www.firephp.org/Wiki/Reference/Fb
+     * @see 
      * @param mixed $object
      * @return true
      * @throws Exception
      */
     public static function send()
     {
+        if (!self::$enabled) return false;
         $args = func_get_args();
         return call_user_func_array(array(ChromePhp::getInstance(), $args[0] ), $args);
     }
@@ -153,9 +160,10 @@ class FB
      * @param array $options OPTIONAL Instructions on how to log the group
      * @return true
      */
-    public static function group($name, $options=null)
+    public static function group()
     {
-        return self::send(ChromePhp::GROUP, $name, $options );
+        $args = func_get_args();
+        return self::send(ChromePhp::GROUP,$args);
 
         //return ChromePhp::getInstance()->group(ChromePhp::GROUP_END,$name, $options);
     }
@@ -167,7 +175,7 @@ class FB
      */
     public static function groupEnd()
     {
-        return self::send(ChromePhp::GROUP_END, null, null );
+        return self::send(ChromePhp::GROUP_END );
     }
     /**
      * Log object with label to firebug console
@@ -256,9 +264,6 @@ class FB
         return false;
     }
 
-
-
-
     /**
      * Log a trace in the firebug console
      *
@@ -271,6 +276,7 @@ class FB
     {
         return self::send( $type, debug_backtrace() );
     }
+    
     /**
      * Log a table in the firebug console
      *
