@@ -13,25 +13,29 @@ This library allows you to log variables to console.
 
 ## Installation
 
-![Instalation FirePHP]https://raw.githubusercontent.com/urands/urands.github.io/master/resource/test.gif
+[Instalation FirePHP](https://raw.githubusercontent.com/urands/urands.github.io/master/resource/test.gif)
 
 ### Instalation from composer (RECOMMENDED)
-1. Add FirePHP package to your project using [composer]https://getcomposer.org/
+1. Add FirePHP package to your project using [composer](https://getcomposer.org/)
+
     ```
     composer require urands/firephp
     ```
+
 2. If you didn't use composer yet, put somewhere autoload class in your project
-	```
+
+	```php
 	require __DIR__ . '/vendor/autoload.php';
 	```
 
 ### Instalation from source
 
-1. Download [FirePhp sources]https://github.com
+1. Download [FirePhp sources](https://github.com)
 
 2. Put fb.php somewhere in your PHP include path
+
 	```php
-		include_once <some_dir>/fb.php
+		require_once fb.php
 	```
 
 
@@ -40,12 +44,11 @@ This library allows you to log variables to console.
 1. Put function 'fb' somewhere in your code
 
 	```php
-		include_once 'fb.php'
+		require 'fb.php'
 
-		fb('This FirePHP for Firefox 51+');
+		FB::log('This FirePHP for Firefox 51+');
 		.....
 		FB::info($_SERVER);
-
 
 	```
 
@@ -56,7 +59,7 @@ This library allows you to log variables to console.
 ## Support & Feedback
 ==================
 
-See [Support](http://docs.sourcemint.org/firephp.org/firephp/1/-docs/OpenSource#support) in the [FirePHP 1.0 Documentation](http://docs.sourcemint.org/firephp.org/firephp/1/-docs/).
+See [Support](http://firephp.bel-tech.ru)
 
 
 
