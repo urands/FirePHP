@@ -4,7 +4,7 @@ Replacing the original FirePHP to the new based on ChromePhp
 ===========
 
 ## Overview
-FirePHP is a PHP library for the Chrome Logger Google Chrome extension and  Firebug console logger Firefox 51+.
+FirePHP is a PHP library for the Chrome Logger Google Chrome extension and Firebug console logger Firefox 51+.
 
 This library allows you to log variables to console.
 
@@ -13,7 +13,7 @@ This library allows you to log variables to console.
 
 ## Installation
 
-### Instalation from composer (RECOMMENDED)
+### Installation from composer (RECOMMENDED)
 1. Add FirePHP package to your project using [composer](https://getcomposer.org/)
 
     ```
@@ -26,9 +26,9 @@ This library allows you to log variables to console.
 	require __DIR__ . '/vendor/autoload.php';
 	```
 
-### Instalation from source
+### Installation from source
 
-1. Download [FirePhp sources](https://github.com/urands/)
+1. Download [FirePhp sources](https://github.com/urands/FirePHP/releases/download/1.0.4/FirePHP-1.0.4-stable.zip)
 
 2. Put fb.php somewhere in your PHP include path
 
