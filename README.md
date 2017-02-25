@@ -11,6 +11,8 @@ This library allows you to log variables to console.
 
 ## Installation
 
+<img src="https://github.com/urands/urands.github.io/blob/master/resource/firephp-install.gif?raw=true" />
+
 ### Installation from composer (RECOMMENDED)
 1. Add FirePHP package to your project using [composer](https://getcomposer.org/)
 
