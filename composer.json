@@ -5,8 +5,8 @@
     "keywords": ["log","logging","firephp","firefox"],
     "homepage": "http://github.com/urands/firephp",
     "license": "MIT",
-    "minimum-stability": "dev",
-    "version": "1.0.3",
+    "minimum-stability": "stable",
+    "version": "1.0.4",
     "authors": [
         {
             "name": "Iurii Bell",

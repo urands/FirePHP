@@ -1,4 +1,4 @@
-# FirePHP 1.1 ()
+# FirePHP 1.1 
 Replacing the original FirePHP to the new based on ChromePhp
 
 ===========
@@ -12,8 +12,6 @@ This library allows you to log variables to console.
 - PHP 5 or late
 
 ## Installation
-
-[Instalation FirePHP](https://raw.githubusercontent.com/urands/urands.github.io/master/resource/test.gif)
 
 ### Instalation from composer (RECOMMENDED)
 1. Add FirePHP package to your project using [composer](https://getcomposer.org/)
@@ -30,12 +28,12 @@ This library allows you to log variables to console.
 
 ### Instalation from source
 
-1. Download [FirePhp sources](https://github.com)
+1. Download [FirePhp sources](https://github.com/urands/)
 
 2. Put fb.php somewhere in your PHP include path
 
 	```php
-		require_once fb.php
+		require_once 'fb.php'
 	```
 
 
@@ -44,7 +42,7 @@ This library allows you to log variables to console.
 1. Put function 'fb' somewhere in your code
 
 	```php
-		require 'fb.php'
+		require_once 'fb.php'
 
 		FB::log('This FirePHP for Firefox 51+');
 		.....
