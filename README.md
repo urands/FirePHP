@@ -1,4 +1,4 @@
-# FirePHP 1.0.4 
+# FirePHP 1.0.5 
 Replacing the original FirePHP to the new based on ChromePhp
 
 ## Overview

@@ -39,6 +39,7 @@ if (!class_exists('ChromePhp', false)) {
 }
 
 ChromePhp::getInstance()->addSetting(ChromePhp::BACKTRACE_LEVEL, 3);
+
 /**
  * Sends the given data to the FirePHP Firefox Extension.
  * The data can be displayed in the Firebug Console or in the
