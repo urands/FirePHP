@@ -33,7 +33,7 @@
  */
 
 if (!class_exists('ChromePhp', false)) {
-	if (file_exists( dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php'){
+	if (file_exists( dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php')){
 		require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'ChromePhp.php';
 	}
 }
